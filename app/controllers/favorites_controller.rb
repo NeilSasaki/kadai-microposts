@@ -6,7 +6,7 @@ class FavoritesController < ApplicationController
     current_user.add2favorite(target_post)
     #binding.pry
     flash[:success] = '投稿をお気に入りに登録しました'
-    redirect_to root_path
+    redirect_back(fallback_location: root_path) #このアクションが実行されたページに戻るメソッド. 保険として、失敗したときにroot_pathへ
   end
 
   def destroy
@@ -14,6 +14,6 @@ class FavoritesController < ApplicationController
     current_user.rm_favorite(target_post)
     #binding.pry
     flash[:success] = 'お気に入りから削除しました'
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
   end
 end
