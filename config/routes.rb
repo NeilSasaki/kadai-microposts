@@ -14,12 +14,10 @@ Rails.application.routes.draw do
       #member の get :followings に対応して /users/:id/followings という URL が生成される
       get :followers
       #member の get :followers に対応して /users/:id/followers という URL が生成される
-      #get :myfavorites
-      #memberのget :myfavoritesに対してusers/:id/myfavoritesというURLが生成される
       #課題の要件としてlikesアクションが求められているので、users/:id/likesを生成する
       get :likes
       #課題の要件としてlikesアクションが求められているので、users/:id/likesを生成する
-      get :famousfor
+      # get :famousfor 今回は特に使わないが、将来使うかもしれない
       #memberのget :famousforに対してusers/:id/famousforというURLが生成される
     end
   end

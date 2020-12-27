@@ -16,9 +16,9 @@ class User < ApplicationRecord
     has_many :followers, through: :reverses_of_relationship, source: :user #reverses_of_relationshipという中間テーブルを通じ、user_id列を参照
     #ここから課題↓
     has_many :favorites # foreign_key: 'user_id'省略　自分がお気に入りのMicropostへの参照
-    has_many :myfavorites, through: :favorites, source: :micropost #favoritesという中間テーブルを通じて、micropost_id列を参照
-    has_many :famous_for_user, class_name: 'Favorite', foreign_key: 'Micropost_id' #そのMicropostをお気に入りに登録しているUserへの参 class_nameはFavorite？？
-    has_many :famousfor,through: :famous_for_user, source: :user #user.famousforでそのMicropostをお気に入りにしているUser達を取得
+    has_many :likes, through: :favorites, source: :micropost #favoritesという中間テーブルを通じて、micropost_id列を参照
+    #has_many :famous_for_user, class_name: 'Favorite', foreign_key: 'Micropost_id' #そのMicropostをお気に入りに登録しているUserへの参 class_nameはFavorite？？
+    #has_many :famousfor,through: :famous_for_user, source: :user #user.famousforでそのMicropostをお気に入りにしているUser達を取得
     
     def follow(other_user) #他のユーザーをフォローするメソッド
         unless self == other_user #自分自身ではない事を確認
@@ -60,7 +60,7 @@ class User < ApplicationRecord
     end
     
     def myfavorite?(target_post)
-        self.myfavorites.include?(target_post)
+        self.likes.include?(target_post)
         #自分のお気に入りを確認し、target_postが含まれていればtrueを返す
     end
     
