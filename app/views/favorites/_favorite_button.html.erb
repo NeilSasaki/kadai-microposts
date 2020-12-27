@@ -1,0 +1,15 @@
+<%# お気に入り登録/お気に入り解除ボタンは、表示しているUserが自分自身ではない場合に表示される %>
+<%# unless current_user == user %> 
+  <% if current_user.myfavorite?(target_post) %><%# お気に入り解除ボタンは、myfavoriteにすでに登録されている場合に表示される %>
+    <%= form_with(model: current_user.favorites.find_by(micropost_id: target_post.id), local: true, method: :delete) do |f| %>
+      <%= hidden_field_tag :micropost_id, target_post.id %> <%#micropost_idというパラメータ名でtarget_post.idを送信 %>
+      <%#=hidden_field_tag :送信するパラメータ名, 送信するパラメータの値 %>
+      <%= f.submit 'お気に入り解除', class: 'btn btn-danger btn-sm' %>
+    <% end %>
+  <% else %><%# お気に入り登録ボタンは、myfavoriteにまだ登録されていない場合に表示される %>
+    <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
+      <%= hidden_field_tag :micropost_id, target_post.id %>
+      <%= f.submit 'お気に入り登録', class: 'btn btn-success btn-sm' %>
+    <% end %>
+  <% end %>
+<%# end %>

@@ -14,5 +14,7 @@ class ApplicationController < ActionController::Base
     @count_microposts = user.microposts.count
     @count_followings = user.followings.count
     @count_followers = user.followers.count
+    @count_myfavorites = user.myfavorites.count#お気に入り投稿数をカウント
+    @count_famousfor = user.famousfor.count#お気に入りに登録されている数をカウント
   end
 end

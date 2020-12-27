@@ -12,8 +12,7 @@
         <div>
           <% if current_user == micropost.user %>
             <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
-            <%#= 自分の投稿をお気に入りにしたくない場合は↓のコードを消す %>
-            <%= render 'favorites/favorite_button', target_post: micropost , user: micropost.user %> 
+            <!--ここは、-->
           <% else %>  <!--自分以外のユーザーの投稿の場合はお気に入り登録/解除ボタンを設置-->
             <%#= renderでfavorite_buttonのパーシャルを表示させ、micropostをtarget_postというローカルインスタンス,そのポストのユーザー(micropost.user)をuserとして渡す %>
             <%= render 'favorites/favorite_button', target_post: micropost , user: micropost.user %> 

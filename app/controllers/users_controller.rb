@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers]
+  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers, :myfavorites]
 
   def index
     @users = User.order(id: :desc).page(params[:page]).per(25)
@@ -27,15 +27,23 @@ class UsersController < ApplicationController
     end
   end
 
-  def followings
+  def followings#数をカウントするだけ
     @user = User.find(params[:id])
     @followings = @user.followings.page(params[:page])
     counts(@user)
   end
   
-  def followers
+  def followers#数をカウントするだけ
     @user = User.find(params[:id])
     @followers = @user.followers.page(params[:page])
+    counts(@user)
+  end
+  
+  def myfavorites #数をカウントするだけ
+    #@microposts = Micropost.find(params[:micropost_id])
+    @user = User.find(params[:id])
+    #binding.pry
+    @myfavorites = @user.myfavorites.page(params[:page])
     counts(@user)
   end
 
